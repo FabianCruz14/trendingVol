@@ -1,5 +1,12 @@
 import React from "react";
+import ButtonCounter from "./components/ButtonDoublePositive";
 
-export default function App() {
-  return <h1>Hello World</h1>;
+function App() {
+  return (
+    <div className="controlers">
+      <ButtonCounter />
+    </div>
+  );
 }
+
+export default App;

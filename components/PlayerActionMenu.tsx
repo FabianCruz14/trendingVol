@@ -1,27 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, Platform } from 'react-native';
+// first we import a Components from react-native and react-native-menu
 import { MenuView, MenuComponentRef } from '@react-native-menu/menu';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+//then we create a functional component called PlayerActionMenu 
+
+const PlayerActionMenu = () => {
   const menuRef = useRef<MenuComponentRef>(null);
-  
   return (
     <View style={styles.container}>
-
       <Button
-        title="Open Menu"
-        onPress={() => {
-          menuRef.current?.show();}}
+        title="Show Menu with ref (Android only)"
+        onPress={() => menuRef.current?.show()}
       />
-      
       <MenuView
         ref={menuRef}
-        title="Menu"
-        onPressAction={({nativeEvent}) => {
+        title="Menu Title"
+        onPressAction={({ nativeEvent }) => {
           console.warn(JSON.stringify(nativeEvent));
         }}
-
         actions={[
           {
             id: 'add',
@@ -90,28 +87,23 @@ export default function App() {
       </MenuView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     flex: 1,
-    marginTop: 50,
-    height: '75%',
-    width: '100%',
-    backgroundColor: 'cyan',
-  },
-  button : {
-    backgroundColor: 'blue',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  button: {
+    backgroundColor: '#2367A2',
+    padding: 10,
+    borderRadius: 5,
   },
   buttonText: {
+    color: '#fff',
     fontSize: 16,
-    color: 'white',
-    textAlign: 'center',
   },
 });
+export default PlayerActionMenu;

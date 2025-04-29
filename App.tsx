@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
-import FloatButton from './components/FloatButton'; 
+import ButtonIcon from './components/ButtonCard'; // Importar el componente ButtonIcon
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
-
-      <FloatButton />
+      <ButtonIcon /> 
 
     </View>
   );

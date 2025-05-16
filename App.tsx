@@ -1,17 +1,33 @@
 import * as React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import ButtonIcon from './components/ButtonCard'; // Importar el componente ButtonIcon
-import MenuPlayer from './components/MenuPlayer';
 import Header from './layout/header/Header';
+import DoublePositive from './components/DoublePositiveButton';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Header/>
+      <DoublePositive 
+        name="Fabian"
+      />
+
       <ButtonIcon /> 
       </View>
   );
 }
+
+
+// colors;
+// #c6e1f1 200
+// #94c8e5  300
+// #5babd5  400
+// #3692c1  500
+// #2674a3  600
+// #1f5a7f  700
+// #1e4f6e  800
+// #1e435c  900
+// #142c3d  950
 
 const styles = StyleSheet.create({
   container: {
@@ -19,18 +35,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     height: '100%',
     width: '100%',
-    backgroundColor: 'cyan',
+    backgroundColor: '#c6e1f1',
   },
-  header: {
-    flex: 1,
-    backgroundColor: 'skyblue',
-  },
-  titleBase: {
-    
-  },
-  innerText: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: 'blue',
-  }
 });

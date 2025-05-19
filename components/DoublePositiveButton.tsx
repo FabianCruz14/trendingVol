@@ -1,29 +1,59 @@
 import React, {useState} from 'react'
-import { Button, Text, View } from 'react-native'
+import { Button, Pressable, Text, View, StyleSheet} from 'react-native'
 
-// first we declare a type will be use into us button
-
-type PlayerProps = {
-    name : string;
+interface ButtonProps {
+    name: string;
+    action: string;
 }
 
-const DoublePositive = (fabian: PlayerProps) => {
-    const [doublePositive, setDoublePositive] = useState(0);
-    const [showStats, setShowStats] = useState(false);
-    let a : number = 0;
 
-    function doubleIncrement(){
-        setDoublePositive(a =+ 1);
+const Buttons = (props: ButtonProps) => {
+    const [serve, setServe] = useState<number>(0);
+
+    function doublePositiveServe (){
+        setServe(serve+2);
     }
+
+    function doubleNegativeServe (){
+        setServe(serve-2);
+    }
+
+
 
     return (
         <View>
             <Text>
-                Hello {fabian.name}
-            </Text>     
-                 
-        </View>
-    )
-}
+                {props.name}
+            </Text>
+            <Text>
+                {props.action}
+            </Text>
 
-export default DoublePositive;
+            <Pressable onPress={doublePositiveServe}>
+                <Text>
+                    +2
+                </Text>
+            </Pressable>
+
+            <Pressable onPress={doubleNegativeServe}>
+                <Text>
+                    -2
+                </Text>
+            </Pressable>
+            
+            <Text>
+                you have {serve} points on serve
+            </Text>
+        </View>
+    );
+
+
+
+    
+}
+const styles = StyleSheet.create({
+    
+
+})
+
+export default DoublePositive; 

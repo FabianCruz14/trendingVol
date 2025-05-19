@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Pressable, Text, View, StyleSheet} from 'react-native'
+import { Pressable, Text, View, StyleSheet} from 'react-native'
 
 interface ButtonProps {
     name: string;
@@ -8,25 +8,26 @@ interface ButtonProps {
 
 
 const Buttons = (props: ButtonProps) => {
-    const [serve, setServe] = useState<number>(0);
+    const [counter, setCounter] = useState<number>(0);
 
     function doublePositiveServe (){
-        setServe(serve+2);
+        setCounter(counter+2);
     }
 
     function doubleNegativeServe (){
-        setServe(serve-2);
+        setCounter(counter-2);
     }
 
 
 
     return (
-        <View>
-            <Text>
-                {props.name}
-            </Text>
-            <Text>
+        <View style = {styles.button}>
+            <Text style = {styles.action}>
                 {props.action}
+            </Text>
+
+            <Text style={styles.name}>
+                {props.name}
             </Text>
 
             <Pressable onPress={doublePositiveServe}>
@@ -40,20 +41,26 @@ const Buttons = (props: ButtonProps) => {
                     -2
                 </Text>
             </Pressable>
-            
+
             <Text>
-                you have {serve} points on serve
+                you have {counter} points on serve
             </Text>
         </View>
     );
-
-
-
-    
 }
 const styles = StyleSheet.create({
-    
-
+    button: {
+        width: 50,
+        height: 50,
+        backgroundColor: 'blue',
+        borderRadius: 50,
+    },
+    action: {
+        fontSize: 25
+    },
+    name: {
+        fontSize: 12
+    },
 })
 
-export default DoublePositive; 
+export default Buttons; 

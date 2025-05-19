@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
-import ButtonIcon from './components/ButtonCard'; // Importar el componente ButtonIcon
 import Header from './layout/header/Header';
-import DoublePositive from './components/DoublePositiveButton';
+import Buttons from './components/DoublePositiveButton';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Header/>
-      <DoublePositive 
-        name="Fabian"
-      />
 
-      <ButtonIcon /> 
-      </View>
+      <Buttons name='Fabian Cruz' action='Serve'></Buttons>
+
+    </View>
   );
 }
 

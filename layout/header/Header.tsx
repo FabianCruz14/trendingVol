@@ -1,6 +1,6 @@
 // in this file we will create a header who contain an app title and more
 import React from 'react';
-import { View, Text, StyleSheet, ViewComponent } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 
 
@@ -10,6 +10,7 @@ const Header = () => {
                 <Text style = {styles.innerText}>
                     trendingVol
                 </Text> 
+
         </View>
     );
 };

@@ -4,29 +4,13 @@ import { Pressable, Text, View, StyleSheet} from 'react-native'
 interface ButtonProps {
     name: string;
     action: string;
+
 }
 
 
 const Buttons = (props: ButtonProps) => {
-    const [counter, setCounter] = useState<number>(0);
+    const [doublePositive, setDoublePositive] = useState<number>(0);
 
-    function doublePositiveServe (){
-        setCounter(counter+2);
-    }
-
-    function doubleNegativeServe (){
-        setCounter(counter-2);
-    }
-
-    function statServe (numServ: number, intentos: number, ptjServ :number){
-        ptjServ = numServ / intentos;
-
-        return ptjServ;
-    }
-
-    const fabian = [
-        
-    ]
 
     return (
         <View style = {styles.container}>
@@ -39,22 +23,19 @@ const Buttons = (props: ButtonProps) => {
             </Text>
 
             <View style={styles.buttonRow}>
-                <Pressable style={styles.circleButton} onPress={doublePositiveServe}>
-                    <Text style= {styles.buttonText}>
-                        +2
-                    </Text>
-                </Pressable>
+                <Pressable 
+                        onPress={()=> setDoublePositive(doublePositive => doublePositive + 2)}
 
-                <Pressable style={styles.circleButton} onPress={doubleNegativeServe}>
-                    <Text style = {styles.buttonText}>
-                        -2
-                    </Text>
-                </Pressable>                
+                        style ={styles.circleButton} >  
+                        <Text style= {styles.buttonText}>
+                            +2
+                        </Text>
+                </Pressable>             
             </View>
 
 
             <Text style={styles.buttonInfo}>
-                you have {counter} points on serve
+                you have {doublePositive}  on serve
             </Text>
         </View>
     );

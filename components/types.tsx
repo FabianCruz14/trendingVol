@@ -1,6 +1,8 @@
 // to good practice, we define here a interfaces and types
 
+
 export interface PlayerCardProps {
+    // this interface its to show a player info
     name: string;
     lastName: string,
     imageUri: string;
@@ -14,3 +16,10 @@ export interface PlayerCardProps {
     err: number;
 }
 
+export interface BottonProps {
+    // in this interface define a properties who need to show a botton to get data
+    name : string;
+    action : string;
+}
+
+// in the bellow types define a

@@ -22,4 +22,4 @@ export interface BottonProps {
     action : string;
 }
 
-// in the bellow types define a
+

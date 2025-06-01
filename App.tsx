@@ -3,6 +3,7 @@ import { StyleSheet, Text, View} from 'react-native';
 import Header from './layout/header/Header';
 import Buttons from './components/DoublePositiveButton';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import ButtonPlayer from './components/Button';
 
 
 export default function App() {
@@ -10,7 +11,8 @@ export default function App() {
     <SafeAreaProvider>
       <SafeAreaView style = { styles.container}>
       <Header/>
-      <Buttons name='Fabian Cruz' action='Serve'></Buttons>
+      <Buttons name='Fabian Cruz'></Buttons>
+      <ButtonPlayer name='Fabian Cruz'></ButtonPlayer>
 
       </SafeAreaView>
 

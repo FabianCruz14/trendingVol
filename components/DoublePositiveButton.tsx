@@ -18,14 +18,14 @@ const Button : React.FC <BottonProps> = ({name}) => {
 
             <View style={styles.buttonRow}>
                 <Pressable 
-                        onPress={()=> setDoublePositive(doublePositive => doublePositive + 2)}
                         style = {({pressed}) => [
                             {
                                 backgroundColor: pressed ? '#5cb85c' : '#94c8e5',
-                                
+                                 
                             },
                             styles.circleButton
-                        ]}>  
+                        ]}
+                        onPress={()=> setDoublePositive(doublePositive => doublePositive + 2)}>  
 
                         {({pressed}) => (
                             <Text style={[

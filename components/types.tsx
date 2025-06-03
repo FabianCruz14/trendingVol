@@ -19,6 +19,7 @@ export interface PlayerCardProps {
 export interface BottonProps {
     // in this interface define a properties who need to show a botton to get data
     name : string;
+    playerNum : number;
 }
 
 

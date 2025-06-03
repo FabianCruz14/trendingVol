@@ -18,19 +18,32 @@ interface Selection{
 }
 
 // here we create an botton to record any game action to save into a DATABASE
-const ButtonPlayer : React.FC <BottonProps> = ({name}) => {
+const ButtonPlayer : React.FC <BottonProps> = ({name, playerNum}) => {
     // in this hook set de menu visibility
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
-
     // this hook store the selection to show a subMenu of values
     const [subMenuVisible, setSubMenuVisible] = useState<Action | null> (null);
-
     // this hook store the final selection (action + value)
     const [selection, setSelection] = useState <Selection | null> (null);
+    //in the hook below define an array with all actions who is an type of Selection array with unfill array
+    const [story, setStory] = useState <Selection[]> ([]);
 
     // here we create an array who contain the option to show 
     const actions: Action[] = ['Serve', 'Kill', 'Block', 'Dig', 'Assist'];
     const values: Value[] = [-2, -1, 0, 1, 2];
+
+    // this function recive an action & value. Then create an object with this action and values 
+    const recordSelection = (action: Action, value: Value) => {
+        // object with actions and values 
+        const newAction : Selection = {action, value};
+        // prev represent a previous value of the state, React guatantees that prev is the most recent state
+        // the set bellow means:
+        // when update story, take the recent value (prev) and add newAction to queue
+        setStory (prev => [...prev, newAction]);
+        // close the menu for a clean UI
+        setSubMenuVisible(null);
+        setMenuVisible(false);
+    };
 
     function KillAvg (killsPoints:number, totalKills:number){
         let kAvg: number = 0;
@@ -47,30 +60,119 @@ const ButtonPlayer : React.FC <BottonProps> = ({name}) => {
     return(
         <View style={styles.container}>
             {/* here create a main button to select actions and values */}
-            <Pressable style = {styles.mainButton}
+            <Pressable style = {({pressed}) => [
+              {
+                backgroundColor : pressed ? '#5cb85c' : '#94c8e5',
+
+              },
+              styles.mainButton
+            ]}
+            
+            
                 // when user press the button, menuVisible set as true
                 onPress={() => setMenuVisible(!menuVisible)}>
-                <Text style = {styles.player}>{name}</Text>
+                <Text style = {styles.playerName}>{name}</Text>
+                <Text style = {styles.playerNum}>{playerNum}</Text>
+                
             </Pressable>
 
-            <Text>
-                {name}
-                {fabianKill}
-            </Text>
-        </View>
+            {/* conditional paterns using && that means: if 'condition' then render the menu in ui */}
+            {menuVisible && (
+                <View style ={styles.menu}> 
+                    {actions.map((action) => (
+                        <Pressable key={action} 
+                            style = {({pressed}) => [
+                                {
+                                    backgroundColor : pressed ? '#5cb85c' : '#94c8e5',
+                                },
+                                styles.actions
+                            ]}
+                            onPress={() => setSubMenuVisible(action)}>
+                                <Text style = {styles.txtOption}> {action}</Text>
+                        </Pressable>
+                    ))}
+                </View>
+            )}
 
+            {subMenuVisible && (
+                <View style = {styles.subMenu}>
+                    {values.map((value) => (
+                        <Pressable key={value} 
+                            style = {({pressed}) => [
+                              {
+                                backgroundColor : pressed ? '#94c8e5' : '#3692c1'
+                              },
+                              styles.values
+                            ]}
+                            onPress={() => recordSelection (subMenuVisible, value)}>
+                                <Text style = {styles.txtOption}> {value}</Text>
+                        </Pressable>
+                    ))}
+                </View>
+            )}
+
+            {selection && (
+                <Text style = {styles.info}>
+                    Last Action {selection.action} {selection.value}
+                </Text>
+            )}
+        
+        </View>
     );
 }
 
 const styles = StyleSheet.create ({
         container:{
-            flex: 1,
-            backgroundColor: 'cyan'
+            height: 200,
+            width: 200,
+            alignItems: 'center',
+            borderRadius: 10,
+            backgroundColor: '#2674a3'
         },
-        txt: {
-            fontWeight: 'bold'
+        mainButton: {
+          width: 50,
+          height: 50,
+          borderRadius: 50,
+          alignItems: 'center',
+          justifyContent: 'space-between'      
+        },
+        playerName: {
+          fontSize: 10,
+          fontWeight: 'light'
+        },
+        playerNum : {
+          fontSize: 14,
+          fontWeight: 'bold'
+        },
+        actions: {
+           padding: 8,
+           margin: 5,
+           borderRadius: 8
+        },
+        menu : {
+          flexDirection: 'row',
+          marginBottom: 10,
+        },
+        subMenu: {
+          flexDirection: 'column',
+          marginBottom: 10
+        },
+        values: {
+          padding: 8,
+          margin: 5,
+          borderRadius: 10,
+        },
+        info : {
+          marginTop: 20,
+          fontSize: 18,
+          fontWeight: 'bold'
         }
-
+        ,
+        txtOption: {
+          fontSize: 16,
+          fontWeight: 'bold'
+        }
+  
 
     }
 );

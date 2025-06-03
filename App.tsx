@@ -11,8 +11,7 @@ export default function App() {
     <SafeAreaProvider>
       <SafeAreaView style = { styles.container}>
       <Header/>
-      <Buttons name='Fabian Cruz'></Buttons>
-      <ButtonPlayer name='Fabian Cruz'></ButtonPlayer>
+      <ButtonPlayer name='Fabian Cruz' playerNum={14} ></ButtonPlayer>
 
       </SafeAreaView>
 

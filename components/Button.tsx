@@ -1,21 +1,7 @@
 import React, {useState} from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { BottonProps } from "./types";
+import { BottonProps, Action, Value, Selection } from "./types";
 
-// in the bellow types define the actions to record
-// Action is type of each game-action to count and then record this data (action + value) in a Database
-// thats means Action can be "Serve", "Kill", "Assist", "Dig" or "Block"
-// and Value can be -2, -1, 0, 1, 2
-type Action = 'Serve' | 'Block' | 'Dig' | 'Assist' | 'Kill' ;
-type Value = -2 | -1 | 0 | 1 | 2;
-
-// in the bellow interface we define a data who need to info for user, in this case called Selection
-// Selection had 2 properties, action and value, thats means they need this data 
-interface Selection{
-    // property action is of type Actions
-    action: Action;
-    value: Value;
-}
 
 // here we create an botton to record any game action to save into a DATABASE
 const ButtonPlayer : React.FC <BottonProps> = ({name, playerNum}) => {
@@ -40,6 +26,9 @@ const ButtonPlayer : React.FC <BottonProps> = ({name, playerNum}) => {
         // the set bellow means:
         // when update story, take the recent value (prev) and add newAction to queue
         setStory (prev => [...prev, newAction]);
+        // set the selection to show in the UI
+        // this means that the selection is the last action and value selected by user
+        setSelection(newAction);
         // close the menu for a clean UI
         setSubMenuVisible(null);
         setMenuVisible(false);
@@ -116,6 +105,17 @@ const ButtonPlayer : React.FC <BottonProps> = ({name, playerNum}) => {
                     Last Action {selection.action} {selection.value}
                 </Text>
             )}
+
+                        {story.length  > 0 && (
+              <View style={{marginTop: 10}}>
+                <Text style={{fontWeight: 'bold'}}>Historial:</Text>
+                {story.map((item, idx) => (
+                  <Text key={idx} style={{fontSize: 12}}>
+                    {item.action} {item.value}
+                  </Text>
+                ))}
+              </View>
+            )}
         
         </View>
     );
@@ -133,6 +133,7 @@ const styles = StyleSheet.create ({
           width: 50,
           height: 50,
           borderRadius: 50,
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between'      
         },

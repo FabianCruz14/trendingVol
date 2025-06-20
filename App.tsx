@@ -1,21 +1,15 @@
 import * as React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import Header from './layout/header/Header';
-import Buttons from './components/DoublePositiveButton';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import ButtonPlayer from './components/Button';
+import MainButton from './layout/app/MainButton';
 
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style = { styles.container}>
-      <Header/>
-      <ButtonPlayer name='Fabian Cruz' playerNum={14} ></ButtonPlayer>
-
-      </SafeAreaView>
-
-    </SafeAreaProvider>
+    <View style = {styles.container}>
+      <Header></Header>
+      <MainButton playerNum = {14} name = 'Fabian'></MainButton>
+    </View>
   );
 }
 
@@ -34,7 +28,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50,
     height: '100%',
     width: '100%',
     backgroundColor: '#c6e1f1',

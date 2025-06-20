@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { BottonProps, Action, Value, Selection } from "./types";
+import { ButtonProps, Action, Value, Selection } from "./types";
 
 
 // here we create an botton to record any game action to save into a DATABASE
-const ButtonPlayer : React.FC <BottonProps> = ({name, playerNum}) => {
+const ButtonPlayer : React.FC <ButtonProps> = ({name, playerNum}) => {
     // in this hook set de menu visibility
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
     // this hook store the selection to show a subMenu of values

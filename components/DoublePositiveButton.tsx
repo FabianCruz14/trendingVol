@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import { Pressable, Text, View, StyleSheet} from 'react-native'
 // to improve good practice, we create a types file where declare types and interfaces
-import {BottonProps } from './types'
+import {ButtonProps} from './types'
 
 
 // here we code an simple button who changes whit press in
-const Button : React.FC <BottonProps> = ({name}) => {
+const Btn : React.FC <ButtonProps> = ({name}) => {
 
     // useState can help us cause its a component that remember the state
     const [doublePositive, setDoublePositive] = useState<number>(0);
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Button; 
+export default Btn; 

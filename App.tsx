@@ -2,16 +2,53 @@ import * as React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import Header from './layout/header/Header';
 import MainButton from './layout/app/MainButton';
+import { calculateFrecuancies } from './functions/AbsoluteFrequency';
 
+// examples
+// from any array of values, get a frequency table with this values
+
+// 1.- [-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-1,-2]
+const AttacksFabian = [-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-1,-2];
+const absoluteFrecuencyFabian = calculateFrecuancies(AttacksFabian);
 
 export default function App() {
   return (
     <View style = {styles.container}>
       <Header></Header>
       <MainButton playerNum = {14} name = 'Fabian'></MainButton>
+
+
+      <View style = {styles.frecuencyTable}>
+        <View>
+          <Text>-2</Text>
+          <Text>-1</Text>
+          <Text>0</Text>
+          <Text>1</Text>
+          <Text>2</Text>
+        </View>
+
+      <View style={styles.separator} />
+
+        <View>
+          <Text>{absoluteFrecuencyFabian.doubleNegative}</Text>
+          <Text>{absoluteFrecuencyFabian.negative}</Text>
+          <Text>{absoluteFrecuencyFabian.zero}</Text>
+          <Text>{absoluteFrecuencyFabian.positive}</Text>
+          <Text>{absoluteFrecuencyFabian.doublePositive}</Text>
+        </View>
+
+      <View style={styles.separator} />
+
+
+      </View>
     </View>
+     
+
   );
 }
+
+
+
 
 
 // colors;
@@ -27,9 +64,19 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     flex: 1,
     height: '100%',
     width: '100%',
     backgroundColor: '#c6e1f1',
   },
+  frecuencyTable : {
+    flexDirection : 'row',
+    margin : 10,
+  },
+  separator: {
+  width: 2, // grosor de la línea
+  backgroundColor: '#1f5a7f', // o el color que quieras
+  marginHorizontal: 10,
+}
 });

@@ -19,6 +19,8 @@ export function avgDoubleNegative (arr:number[]){
     //  where N is the length of arrays of values 
     // F = f * N 
     relativeFrecuency = (absoluteFrequency/ arr.length);
+        const rltFrq = Math.round(relativeFrecuency*100)/100;
+
 
     // parcial represents the value of this action (-2), that means:
     // parcial is the sum of all values in the array
@@ -26,11 +28,12 @@ export function avgDoubleNegative (arr:number[]){
 
     // avg represent the percentage, that means:
     // percentage that player fail only in this action 
-    let avg = (relativeFrecuency * 100);
+    let percent:number = (relativeFrecuency) * 100;
+    const avg = Math.round(percent*100)/100;
 
     return {
         absolute : absoluteFrequency,
-        relative : relativeFrecuency,
+        relative : rltFrq,
         parcial,
         xGame : avg
     }
@@ -42,7 +45,6 @@ export function avgNegative (arr : number []){
     // parcial represents the value of this action (-2), that means:
     // parcial is the sum of all values in the array
     let parcial: number = 0;
-    let avg : number =0;
     
     for (let i=0; i<arr.length; i++){
         if (arr[i] === -1){
@@ -52,14 +54,17 @@ export function avgNegative (arr : number []){
 
 
     relativeFrecuency = (absoluteFrequency/ arr.length);
+    const rltFrq = Math.round(relativeFrecuency*100)/100;
+
     parcial = (absoluteFrequency) * (-1);
     // avg represent the percentage, that means:
     // percentage that player fail only in this action 
-    avg = (relativeFrecuency * 100);
+    let percent:number = (relativeFrecuency) * 100;
+    const avg = Math.round(percent*100)/100;
 
     return {
         absolute : absoluteFrequency,
-        relative : relativeFrecuency,
+        relative : rltFrq,
         parcial,
         xGame : avg
     }
@@ -69,7 +74,6 @@ export function avgZero (arr: number[]){
     let absoluteFrequency : number = 0;
     let relativeFrecuency : number = 0;
     let parcial : number = 0;
-    let avg : number = 0;
 
     // to count the absolute frecuency of 0, that means: 
     // times it repeat an action with 0 of value
@@ -83,16 +87,18 @@ export function avgZero (arr: number[]){
     // relative frecuency = (abs frq) / (N)
     // N = trys (arr.length)
     relativeFrecuency = (absoluteFrequency) / (arr.length);
+    const rltFrq = Math.round(relativeFrecuency*100)/100;
 
     // parcial is the producto of value multipled by the number of times it was made
     parcial = (0) * (absoluteFrequency);
 
     // avg is the percent of this action
-    avg = (relativeFrecuency) * 100;
+    let percent:number = (relativeFrecuency) * 100;
+    const avg = Math.round(percent*100)/100;
 
     return {
         absolute : absoluteFrequency,
-        relative : relativeFrecuency,
+        relative : rltFrq,
         parcial,
         xGame : avg
     }
@@ -103,7 +109,6 @@ export function avgPositive (arr: number[]){
     let absoluteFrequency : number = 0;
     let relativeFrecuency : number = 0;
     let parcial : number = 0;
-    let avg: number =0;
 
     // to get absolute frequency we need count times that the value it repeat
     for (let i = 0 ; i< arr.length ; i++){
@@ -111,19 +116,23 @@ export function avgPositive (arr: number[]){
             absoluteFrequency++;
         }
     }
-
+ 
     // to get relative frq we need divede abs frq by arr.length
     relativeFrecuency = ((absoluteFrequency) / arr.length );
+    const rltFrq = Math.round(relativeFrecuency*100)/100;
+
+
 
     // to get parcial we need multipled the value by the number of times it was repeat
     parcial = (absoluteFrequency) * (1) ;
 
     // avg is the percent of this action
-    avg = (relativeFrecuency) * 100;
+    let percent:number = (relativeFrecuency) * 100;
+    const avg = Math.round(percent*100)/100;
 
     return {
         absolute : absoluteFrequency,
-        relative : relativeFrecuency,
+        relative : rltFrq,
         parcial,
         xGame : avg
     }
@@ -133,8 +142,7 @@ export function avgDoublePositive (arr : number []){
     let absoluteFrequency : number = 0;
     let relativeFrecuency : number = 0;
     let parcial : number =0;
-    let avg : number =0;
-
+    
     // to get the best values of this action we need a for and return this value
     for (let i = 0; i<arr.length; i++){
         if ( arr[i] === 2){
@@ -143,18 +151,48 @@ export function avgDoublePositive (arr : number []){
     }
 
     relativeFrecuency = (absoluteFrequency) / (arr.length);
+        const rltFrq = Math.round(relativeFrecuency*100)/100;
+
     parcial = (absoluteFrequency) * (2);
-    avg = (relativeFrecuency) * 100;
+    let percent:number = (relativeFrecuency) * 100;
+    const avg = Math.round(percent*100)/100;
 
     return {
         absolute : absoluteFrequency,
-        relative : relativeFrecuency,
+        relative : rltFrq,
         parcial,
         xGame : avg
     }
 }
 
+// function bellow can help us to calculate a frecuency values only with 
+// array & value to count
+export function calculeFrecuency (array : number[], value: number){
+    let absoluteFrequency : number =0;
+    let relativeFrecuency : number =0;
+    let parcial : number=0;
+    let avgXG : number =0;
 
+    for (let i =0; i<array.length;i++){
+        if ( array[i] === value){
+            absoluteFrequency++
+        }
+    }
+    // const absolute = Math.round(absoluteFrequency*100) / 100;
+
+    relativeFrecuency = (absoluteFrequency) / (array.length);
+    const relativeFrq = Math.round (relativeFrecuency*100)/100;
+
+    parcial = (absoluteFrequency) * (value);
+    avgXG = (relativeFrecuency) * 100;
+    const avg = Math.round(relativeFrecuency*100)/100;
+    return{
+        absoluteFrequency,
+        relativeFrq,
+        parcial,
+        avg
+    }
+}
 
 
 

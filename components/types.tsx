@@ -36,3 +36,10 @@ export interface Selection{
     action: Action;
     value: Value;
 }
+
+// interface to Frecuency table
+export interface FrqTableProps{
+    name : string;
+    array : number[];
+    action : string;
+}

@@ -165,8 +165,8 @@ export function avgDoublePositive (arr : number []){
     }
 }
 
-// function bellow can help us to calculate a frecuency values only with 
-// array & value to count
+// The function below helps us to calculate the frequency values
+//  with only the matrix and the value to be counted
 export function calculeFrecuency (array : number[], value: number){
     let absoluteFrequency : number =0;
     let relativeFrecuency : number =0;
@@ -181,11 +181,11 @@ export function calculeFrecuency (array : number[], value: number){
     // const absolute = Math.round(absoluteFrequency*100) / 100;
 
     relativeFrecuency = (absoluteFrequency) / (array.length);
-    const relativeFrq = Math.round (relativeFrecuency*100)/100;
-
+    const relativeFrq = Math.round (relativeFrecuency*100)/1000;
+    
     parcial = (absoluteFrequency) * (value);
     avgXG = (relativeFrecuency) * 100;
-    const avg = Math.round(relativeFrecuency*100)/100;
+    const avg = Math.round(avgXG*100)/100;
     return{
         absoluteFrequency,
         relativeFrq,
@@ -194,6 +194,12 @@ export function calculeFrecuency (array : number[], value: number){
     }
 }
 
+const AttacksFabian:number [] = [-2,2,-1,2,1,0,1,2,-2,1,1,2,2];
+// const absoluteFrequence= frecuencyAbs(AttacksFabian);
+// console.log(absoluteFrequence.negative)
+
+const avgFabian = calculeFrecuency(AttacksFabian, -2);
+console.log(avgFabian);
 
 
 
@@ -257,8 +263,5 @@ export function calculeFrecuency (array : number[], value: number){
 
 // 1.- [-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-1,-2]
 
-const AttacksFabian:number [] = [-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-1,-2];
-// const absoluteFrequence= frecuencyAbs(AttacksFabian);
-// console.log(absoluteFrequence.negative)
 
 

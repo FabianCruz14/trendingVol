@@ -23,11 +23,12 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
     return (
 
         <View style= {styles.container}>
-            <Text style= {styles.title}>AVG {action} of {name} ; {xGame} % </Text>
+            <Text style= {styles.title}>AVG {action} of {name} ;  </Text> <Text style = {[styles.title, xGame > .25 && {color: 'green'}]}>{xGame} % </Text>
             {/* in the View bellow, we show the values of the action */}
 
             <View style = {styles.frqTable}>
                 <View style= {styles.data}>
+                    <Text style = {styles.description}>Value</Text>
                     <Text style = {{height:18}}>-2</Text>
                     <Text style = {{height:18}}>-1</Text>
                     <Text style = {{height:18}}>0</Text>
@@ -38,6 +39,7 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
 
                 {/* in the View bellow, we show the Absolute Frecuency */}
                 <View style = {styles.data}>
+                    <Text style = {styles.description}>xG</Text>
                     <Text style = {{height:18}}>{avgDN.absoluteFrequency}</Text>
                     <Text style = {{height:18}}>{avgN.absoluteFrequency}</Text>
                     <Text style = {{height:18}}>{avgZ.absoluteFrequency}</Text>
@@ -48,6 +50,7 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
 
                 {/* in the view bellow, we show the Relative Frecuency */}
                 <View style = {styles.data}>
+                    <Text style = {styles.description}>Relative</Text>
                     <Text style = {{height:18}}>{avgDN.relativeFrq}</Text>
                     <Text style = {{height:18}}>{avgN.relativeFrq}</Text>
                     <Text style = {{height:18}}>{avgZ.relativeFrq}</Text>
@@ -58,6 +61,7 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
 
 
                 <View style = {styles.data}>
+                    <Text style = {styles.description}>Parcial</Text>
                     <Text style = {{height:18}}>{avgDN.parcial}</Text>
                     <Text style = {{height:18}}>{avgN.parcial}</Text>
                     <Text style = {{height:18}}>{avgZ.parcial}</Text>
@@ -68,11 +72,12 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
 
 
                 <View style = {styles.data}>
-                    <Text style = {{height: 18, width: 50, textAlign: 'center', backgroundColor: 'red'}}>{avgDN.avg} %</Text>
-                    <Text style = {{height: 18, width: 50, textAlign: 'center', backgroundColor: 'orange'}}>{avgN.avg} %</Text>
-                    <Text style = {{height: 18, width: 50, textAlign: 'center', backgroundColor: '#f2fff4'}}>{avgZ.avg} %</Text>
-                    <Text style = {{height: 18, width: 50, textAlign: 'center', backgroundColor: '#5ccb5f'}}>{avgP.avg} %</Text>
-                    <Text style = {{height: 18, width: 50, textAlign: 'center', backgroundColor: 'green'}}>{avgDP.avg} %</Text>
+                    <Text style = {styles.description}>Avg</Text>
+                    <Text style = {[styles.txt, {backgroundColor: 'red'}]}>{avgDN.avg} %</Text>
+                    <Text style = {[styles.txt, {backgroundColor: 'orange'}]}>{avgN.avg} %</Text>
+                    <Text style = {[styles.txt, {backgroundColor: '#f2fff4'}]}>{avgZ.avg} %</Text>
+                    <Text style = {[styles.txt, {backgroundColor: '#5ccb5f'}]}>{avgP.avg} %</Text>
+                    <Text style = {[styles.txt, {backgroundColor: 'green'}]}>{avgDP.avg} %</Text>
                 </View>
             </View>
         </View>
@@ -88,13 +93,22 @@ const styles = StyleSheet.create ({
         padding: 10,
         backgroundColor: '#94c8e5',
         alignItems: 'center',
-        marginLeft: 10,
+        marginLeft: 100,
+
+    },
+    txt : {
+        height: 18,
+        width: 50,
+        textAlign: 'center'
+    },
+    description: {
+        margin: 0,
+        color: 'blue'
 
     },
     title : {
         fontSize: 16,
         fontWeight: 'bold',
-        marginRight: 10,
         textAlign: 'center'
     },
     frqTable: {
@@ -102,10 +116,9 @@ const styles = StyleSheet.create ({
     },
     data : {
         alignItems: 'center',
-        margin: 7,
     },
     separator : {
-        width : 2,
+        width : 1,
         backgroundColor : '#142c3d',
         marginHorizontal : 10
     }

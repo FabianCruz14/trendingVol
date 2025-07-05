@@ -3,10 +3,19 @@ import { StyleSheet, View, Text } from 'react-native';
 import { calculeFrecuency } from '../../functions/AbsoluteFrequency';
 import { FrqTableProps } from '../../components/types';
 
-// this component can help us to show a frecuency table of diferents actions
-
+// this component help us to show a frecuency table of diferents actions
+// this component need 3 parameters:
+// array (number[])        -> its a values that player performance in a game, training or tryout
+// name (string)           -> name of the player to be calculate
+// action (string)         -> action to be calculate
 
 const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
+    // each variable contain a avg of each values:
+    // avgDN  ->  average of Double Negatives
+    // avgN   ->  average of Negative
+    // avgZ   ->  average of Zero
+    // avgP   ->  average of Positive
+    // avgDP  ->  average of Double Negatives
     const avgDN = calculeFrecuency(array, -2);
     const avgN = calculeFrecuency(array, -1);
     const avgZ = calculeFrecuency(array, 0);
@@ -23,7 +32,15 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
     return (
 
         <View style= {styles.container}>
-            <Text style= {styles.title}>AVG {action} of {name} ;  </Text> <Text style = {[styles.title, xGame > .25 && {color: 'green'}]}>{xGame} % </Text>
+            <View style={[styles.frqTable, {margin : 10}]}>
+
+            <Text style= {styles.title}>AVG {action} of {name} ;  </Text>
+            <Text style = {[
+                styles.title,
+                {color : xGame < 0 ? 'red' : 'green'}
+                ]}
+                > {xGame} % </Text>
+            </View>
             {/* in the View bellow, we show the values of the action */}
 
             <View style = {styles.frqTable}>

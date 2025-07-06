@@ -3,6 +3,7 @@ import { StyleSheet, Text, View} from 'react-native';
 import Header from './layout/header/Header';
 import MainButton from './layout/app/MainButton';
 import FrecuencyTable from './layout/frecuenciesTables/FrqTable';
+import { SafeAreaView } from 'react-native';
 // examples
 // from any array of values, get a frequency table with this values
 

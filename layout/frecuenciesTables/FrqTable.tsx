@@ -10,6 +10,25 @@ import { FrqTableProps } from '../../components/types';
 // action (string)         -> action to be calculate
 
 const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
+    // we declare a values to count
+    const values = [-2, -1, 0, 1, 2];
+    // then, use a const to calcule a frecuencies adding a value
+    const results = values.map (value => ({
+        value, ...calculeFrecuency(array, value)
+    }));
+
+    const sumPartial = results.reduce(
+        (sum, p) => sum + p.parcial, 0
+    );
+
+    const avg = + (sumPartial / (2*(array.length))).toFixed(2);
+
+    console.log(avg)
+    console.log(sumPartial)
+    console.log(results)
+
+
+
     // each variable contain a avg of each values:
     // avgDN  ->  average of Double Negatives
     // avgN   ->  average of Negative
@@ -22,12 +41,7 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
     const avgP = calculeFrecuency (array, 1);
     const avgDP = calculeFrecuency(array, 2);
 
-    const avg = ((avgDN.parcial + avgN.parcial + avgZ.parcial + avgP.parcial + avgDP.parcial))/ ((2) * array.length) ; 
-    const xGame = Math.round (avg * 100) /100;
-
-    // por el momento, mostramos los valores juntos, pero vamos a mejorar esto
-    
-
+    const xGame = + (((avgDN.parcial + avgN.parcial + avgZ.parcial + avgP.parcial + avgDP.parcial))/ ((2) * array.length)).toFixed(2); 
 
     return (
 
@@ -64,18 +78,6 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
                     <Text style = {{height:18}}>{avgDP.absoluteFrequency}</Text>
                 </View>
                 <View style={styles.separator} />
-
-                {/* in the view bellow, we show the Relative Frecuency */}
-                <View style = {styles.data}>
-                    <Text style = {styles.description}>Relative</Text>
-                    <Text style = {{height:18}}>{avgDN.relativeFrq}</Text>
-                    <Text style = {{height:18}}>{avgN.relativeFrq}</Text>
-                    <Text style = {{height:18}}>{avgZ.relativeFrq}</Text>
-                    <Text style = {{height:18}}>{avgP.relativeFrq}</Text>
-                    <Text style = {{height:18}}>{avgDP.relativeFrq}</Text>
-                </View>
-                <View style={styles.separator} />
-
 
                 <View style = {styles.data}>
                     <Text style = {styles.description}>Parcial</Text>
@@ -119,12 +121,11 @@ const styles = StyleSheet.create ({
         textAlign: 'center'
     },
     description: {
-        margin: 0,
         color: 'blue'
 
     },
     title : {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
         textAlign: 'center'
     },

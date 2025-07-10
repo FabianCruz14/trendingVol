@@ -3,23 +3,33 @@ import { StyleSheet, Text, View} from 'react-native';
 import Header from './layout/header/Header';
 import MainButton from './layout/app/MainButton';
 import FrecuencyTable from './layout/frecuenciesTables/FrqTable';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 // examples
 // from any array of values, get a frequency table with this values
 
 // 1.- [-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-1,-2]
 // 2.- [-2,2,-1,2,1,0,1,2,-2,1,1,2,2]
-const AttacksFabian = [-2,2,-1,2,1,0,1,2,-2,1,1,2,2];
+// 3.- [2 ,2, 2, 2, 2, 2,2 ,2,1,1]
+const AttacksFabian = [2 ,2, 2, 2, 2, 2,2 ,2,1,1];
+const atk2 = [-2,2,-1,2,1,0,1,2,-2,1,1,2,2];
+const atk3 = [-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-1,-2,-1,-2];
 
 export default function App() {
   return (
-    <View style = {styles.container}>
-      <Header></Header>
-      <MainButton playerNum = {14} name = 'Fabian'></MainButton>
-      <FrecuencyTable array={AttacksFabian} name = 'Fabian Cruz' action='Attack'></FrecuencyTable>
+    <SafeAreaProvider>
 
-    </View>
-     
+
+      <View style = {styles.container}>
+        <Header></Header>
+        <View style = {styles.frqView}>
+          {/* <FrecuencyTable array={AttacksFabian} name = 'Fabian Cruz' action='Attack'></FrecuencyTable> */}
+          <FrecuencyTable array={atk2} name='M. Nikolov' action='Attack'></FrecuencyTable>
+          {/* <FrecuencyTable array={atk3} name='Darlan' action='Attack'></FrecuencyTable> */}
+        </View>
+  
+      </View>
+
+    </SafeAreaProvider>
 
   );
 }
@@ -46,5 +56,8 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     backgroundColor: '#c6e1f1',
+  },
+  frqView:{
+    justifyContent: 'space-between'
   }
 });

@@ -1,17 +1,20 @@
 // in this file we will create a header who contain an app title and more
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Header = () => {
     return (
+        <SafeAreaView style = {{backgroundColor: 'black'}}>
+
         <View style = {styles.header}>
                 <Text style = {styles.innerText}>
                     trendingVol
                 </Text> 
 
         </View>
+            
+        </SafeAreaView>
     );
 };
 

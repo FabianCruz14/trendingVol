@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TextComponent } from 'react-native';
 import { calculeFrecuency } from '../../functions/AbsoluteFrequency';
 import { FrqTableProps } from '../../components/types';
 
@@ -12,6 +12,7 @@ import { FrqTableProps } from '../../components/types';
 const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
     // we declare a values to count
     const values = [-2, -1, 0, 1, 2];
+
     // then, use a const to calcule a frecuencies adding a value
     const results = values.map (value => ({
         value, ...calculeFrecuency(array, value)
@@ -21,9 +22,9 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
         (sum, p) => sum + p.parcial, 0
     );
 
-    const avg = + (sumPartial / (2*(array.length))).toFixed(2);
+    const avg =  +(sumPartial / (2*(array.length)) * 100).toFixed(2);
 
-    console.log(avg)
+    console.log(avg, typeof avg)
     console.log(sumPartial)
     console.log(results)
 
@@ -41,65 +42,80 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
     const avgP = calculeFrecuency (array, 1);
     const avgDP = calculeFrecuency(array, 2);
 
-    const xGame = + (((avgDN.parcial + avgN.parcial + avgZ.parcial + avgP.parcial + avgDP.parcial))/ ((2) * array.length)).toFixed(2); 
-
     return (
-
-        <View style= {styles.container}>
-            <View style={[styles.frqTable, {margin : 10}]}>
-
-            <Text style= {styles.title}>AVG {action} of {name} ;  </Text>
-            <Text style = {[
-                styles.title,
-                {color : xGame < 0 ? 'red' : 'green'}
-                ]}
-                > {xGame} % </Text>
-            </View>
-            {/* in the View bellow, we show the values of the action */}
-
-            <View style = {styles.frqTable}>
-                <View style= {styles.data}>
-                    <Text style = {styles.description}>Value</Text>
-                    <Text style = {{height:18}}>-2</Text>
-                    <Text style = {{height:18}}>-1</Text>
-                    <Text style = {{height:18}}>0</Text>
-                    <Text style = {{height:18}}>1</Text>
-                    <Text style = {{height:18}}>2</Text>
+        <View style = {styles.num} >
+            {results.map(r => (
+                <View style = {styles.items}>
+                    <Text style = {styles.t}>{r.value}</Text>
+                    <Text style = {styles.t}>{r.absoluteFrequency}</Text>
+                    <Text style = {styles.t}>{r.parcial}</Text>
+                    <Text style = {styles.t}>{r.avg}</Text>
                 </View>
-                <View style={styles.separator} />
+            ))}
 
-                {/* in the View bellow, we show the Absolute Frecuency */}
-                <View style = {styles.data}>
-                    <Text style = {styles.description}>xG</Text>
-                    <Text style = {{height:18}}>{avgDN.absoluteFrequency}</Text>
-                    <Text style = {{height:18}}>{avgN.absoluteFrequency}</Text>
-                    <Text style = {{height:18}}>{avgZ.absoluteFrequency}</Text>
-                    <Text style = {{height:18}}>{avgP.absoluteFrequency}</Text>
-                    <Text style = {{height:18}}>{avgDP.absoluteFrequency}</Text>
-                </View>
-                <View style={styles.separator} />
-
-                <View style = {styles.data}>
-                    <Text style = {styles.description}>Parcial</Text>
-                    <Text style = {{height:18}}>{avgDN.parcial}</Text>
-                    <Text style = {{height:18}}>{avgN.parcial}</Text>
-                    <Text style = {{height:18}}>{avgZ.parcial}</Text>
-                    <Text style = {{height:18}}>{avgP.parcial}</Text>
-                    <Text style = {{height:18}}>{avgDP.parcial}</Text>
-                </View>
-                <View style={styles.separator} />
-
-
-                <View style = {styles.data}>
-                    <Text style = {styles.description}>Avg</Text>
-                    <Text style = {[styles.txt, {backgroundColor: 'red'}]}>{avgDN.avg} %</Text>
-                    <Text style = {[styles.txt, {backgroundColor: 'orange'}]}>{avgN.avg} %</Text>
-                    <Text style = {[styles.txt, {backgroundColor: '#f2fff4'}]}>{avgZ.avg} %</Text>
-                    <Text style = {[styles.txt, {backgroundColor: '#5ccb5f'}]}>{avgP.avg} %</Text>
-                    <Text style = {[styles.txt, {backgroundColor: 'green'}]}>{avgDP.avg} %</Text>
-                </View>
-            </View>
         </View>
+
+        // <View style= {styles.container}>
+        //     <View style={[styles.frqTable, {margin : 10}]}>
+
+        //     <Text style= {styles.title}>AVG {action} of {name} ;  </Text>
+        //     <Text style = {[
+        //         styles.title,
+        //         {color : avg < 0 ? 'red' : 'green'}
+        //         ]}
+        //         > {avg} % </Text>
+        //     </View>
+        //     {/* in the View bellow, we show the values of the action */}
+
+        //     <View style = {styles.frqTable}>
+        //         <View style= {styles.data}>
+        //             <Text style = {styles.description}>Value</Text>
+        //             <Text style = {{height:18}}>-2</Text>
+                       
+
+
+
+
+
+        //             <Text style = {{height:18}}>-1</Text>
+        //             <Text style = {{height:18}}>0</Text>
+        //             <Text style = {{height:18}}>1</Text>
+        //             <Text style = {{height:18}}>2</Text>
+        //         </View>
+        //         <View style={styles.separator} />
+
+        //         {/* in the View bellow, we show the Absolute Frecuency */}
+        //         <View style = {styles.data}>
+        //             <Text style = {styles.description}>xG</Text>
+        //             <Text style = {{height:18}}>{avgDN.absoluteFrequency}</Text>
+        //             <Text style = {{height:18}}>{avgN.absoluteFrequency}</Text>
+        //             <Text style = {{height:18}}>{avgZ.absoluteFrequency}</Text>
+        //             <Text style = {{height:18}}>{avgP.absoluteFrequency}</Text>
+        //             <Text style = {{height:18}}>{avgDP.absoluteFrequency}</Text>
+        //         </View>
+        //         <View style={styles.separator} />
+
+        //         <View style = {styles.data}>
+        //             <Text style = {styles.description}>Parcial</Text>
+        //             <Text style = {{height:18}}>{avgDN.parcial}</Text>
+        //             <Text style = {{height:18}}>{avgN.parcial}</Text>
+        //             <Text style = {{height:18}}>{avgZ.parcial}</Text>
+        //             <Text style = {{height:18}}>{avgP.parcial}</Text>
+        //             <Text style = {{height:18}}>{avgDP.parcial}</Text>
+        //         </View>
+        //         <View style={styles.separator} />
+
+
+        //         <View style = {styles.data}>
+        //             <Text style = {styles.description}>Avg</Text>
+        //             <Text style = {[styles.txt, {backgroundColor: 'red'}]}>{avgDN.avg} %</Text>
+        //             <Text style = {[styles.txt, {backgroundColor: 'orange'}]}>{avgN.avg} %</Text>
+        //             <Text style = {[styles.txt, {backgroundColor: '#f2fff4'}]}>{avgZ.avg} %</Text>
+        //             <Text style = {[styles.txt, {backgroundColor: '#5ccb5f'}]}>{avgP.avg} %</Text>
+        //             <Text style = {[styles.txt, {backgroundColor: 'green'}]}>{avgDP.avg} %</Text>
+        //         </View>
+        //     </View>
+        // </View>
     )
 }
 
@@ -112,8 +128,19 @@ const styles = StyleSheet.create ({
         padding: 10,
         backgroundColor: '#94c8e5',
         alignItems: 'center',
-        marginLeft: 100,
 
+    },
+    num : {
+        flex: 13,
+        width: 'auto',
+        height: 'auto',
+        backgroundColor: 'red'
+    },
+    items : {
+        flexDirection: 'row'
+    },
+    t:{
+        margin: 5
     },
     txt : {
         height: 18,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, TextComponent } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { calculeFrecuency } from '../../functions/AbsoluteFrequency';
 import { FrqTableProps } from '../../components/types';
 
@@ -15,12 +15,10 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
 
     // then, use a const to calcule a frecuencies adding a value
     const results = values.map (value => ({
-        value, ...calculeFrecuency(array, value)
-    }));
+        value, ...calculeFrecuency(array, value)}));
 
     const sumPartial = results.reduce(
-        (sum, p) => sum + p.parcial, 0
-    );
+        (sum, p) => sum + p.parcial, 0);
 
     const avg =  +(sumPartial / (2*(array.length)) * 100).toFixed(2);
 
@@ -28,94 +26,59 @@ const FrecuencyTable : React.FC <FrqTableProps> = ({array, name, action}) => {
     console.log(sumPartial)
     console.log(results)
 
-
-
-    // each variable contain a avg of each values:
-    // avgDN  ->  average of Double Negatives
-    // avgN   ->  average of Negative
-    // avgZ   ->  average of Zero
-    // avgP   ->  average of Positive
-    // avgDP  ->  average of Double Negatives
-    const avgDN = calculeFrecuency(array, -2);
-    const avgN = calculeFrecuency(array, -1);
-    const avgZ = calculeFrecuency(array, 0);
-    const avgP = calculeFrecuency (array, 1);
-    const avgDP = calculeFrecuency(array, 2);
-
     return (
-        <View style = {styles.num} >
-            {results.map(r => (
-                <View style = {styles.items}>
-                    <Text style = {styles.t}>{r.value}</Text>
-                    <Text style = {styles.t}>{r.absoluteFrequency}</Text>
-                    <Text style = {styles.t}>{r.parcial}</Text>
-                    <Text style = {styles.t}>{r.avg}</Text>
-                </View>
-            ))}
-
-        </View>
-
-        // <View style= {styles.container}>
-        //     <View style={[styles.frqTable, {margin : 10}]}>
-
-        //     <Text style= {styles.title}>AVG {action} of {name} ;  </Text>
-        //     <Text style = {[
-        //         styles.title,
-        //         {color : avg < 0 ? 'red' : 'green'}
-        //         ]}
-        //         > {avg} % </Text>
-        //     </View>
-        //     {/* in the View bellow, we show the values of the action */}
-
-        //     <View style = {styles.frqTable}>
-        //         <View style= {styles.data}>
-        //             <Text style = {styles.description}>Value</Text>
-        //             <Text style = {{height:18}}>-2</Text>
-                       
-
-
-
-
-
-        //             <Text style = {{height:18}}>-1</Text>
-        //             <Text style = {{height:18}}>0</Text>
-        //             <Text style = {{height:18}}>1</Text>
-        //             <Text style = {{height:18}}>2</Text>
-        //         </View>
-        //         <View style={styles.separator} />
-
-        //         {/* in the View bellow, we show the Absolute Frecuency */}
-        //         <View style = {styles.data}>
-        //             <Text style = {styles.description}>xG</Text>
-        //             <Text style = {{height:18}}>{avgDN.absoluteFrequency}</Text>
-        //             <Text style = {{height:18}}>{avgN.absoluteFrequency}</Text>
-        //             <Text style = {{height:18}}>{avgZ.absoluteFrequency}</Text>
-        //             <Text style = {{height:18}}>{avgP.absoluteFrequency}</Text>
-        //             <Text style = {{height:18}}>{avgDP.absoluteFrequency}</Text>
-        //         </View>
-        //         <View style={styles.separator} />
-
-        //         <View style = {styles.data}>
-        //             <Text style = {styles.description}>Parcial</Text>
-        //             <Text style = {{height:18}}>{avgDN.parcial}</Text>
-        //             <Text style = {{height:18}}>{avgN.parcial}</Text>
-        //             <Text style = {{height:18}}>{avgZ.parcial}</Text>
-        //             <Text style = {{height:18}}>{avgP.parcial}</Text>
-        //             <Text style = {{height:18}}>{avgDP.parcial}</Text>
-        //         </View>
-        //         <View style={styles.separator} />
-
-
-        //         <View style = {styles.data}>
-        //             <Text style = {styles.description}>Avg</Text>
-        //             <Text style = {[styles.txt, {backgroundColor: 'red'}]}>{avgDN.avg} %</Text>
-        //             <Text style = {[styles.txt, {backgroundColor: 'orange'}]}>{avgN.avg} %</Text>
-        //             <Text style = {[styles.txt, {backgroundColor: '#f2fff4'}]}>{avgZ.avg} %</Text>
-        //             <Text style = {[styles.txt, {backgroundColor: '#5ccb5f'}]}>{avgP.avg} %</Text>
-        //             <Text style = {[styles.txt, {backgroundColor: 'green'}]}>{avgDP.avg} %</Text>
-        //         </View>
-        //     </View>
+        // <View style = {styles.num} >
         // </View>
+
+        <View style= {styles.container}>
+
+            <View style={styles.frqTable}>
+                <Text style= {styles.title}>AVG {action} of {name} ;  </Text>
+                <Text style = {[
+                    styles.title,
+                    {color : avg <= 0 ? 'red' : 'green'}
+                    ]}> {avg} % </Text>
+            </View>
+            {/* in the View bellow, we show the values of the action */}
+
+            <View style = {styles.frqTable}>
+                <View style = {styles.data}>
+                    <Text style = {styles.description}>Value</Text>
+                    {results.map(res=> (
+                        <Text key={res.value} style = {{textAlign: 'center', margin:2}}>{res.value}</Text>
+                    ))}
+                </View>
+
+                <View style={styles.separator} />
+
+                {/* in the View bellow, we show the Absolute Frecuency */}
+                <View style = {styles.data}>
+                    <Text style = {styles.description}>xG</Text>
+                    {results.map(res=> (
+                        <Text key={res.value} style = {{margin: 2}} >{res.absoluteFrequency}</Text> 
+                    ))}
+                </View>
+
+                <View style={styles.separator} />
+
+                <View style = {styles.data}>
+                    <Text style = {styles.description}>Parcial</Text>
+                    {results.map(res => (
+                        <Text key={res.value} style = {{margin: 2}} > {res.parcial} </Text>
+                    ))}
+                </View>
+
+                <View style={styles.separator} />
+
+
+                <View style = {styles.data}>
+                    <Text style = {styles.description}>Avg</Text>
+                    {results.map(res => (
+                        <Text key={res.value} style = {{margin: 2}}> {res.avg} %</Text>
+                    ))}
+                </View>
+            </View>
+        </View>
     )
 }
 
@@ -123,33 +86,17 @@ export default FrecuencyTable;
 
 const styles = StyleSheet.create ({
     container : {
-        width: 280,
-        height:'auto',
-        padding: 10,
+        width: 'auto',
+        height: 'auto',
+        margin: 35,
+        padding: 55,
         backgroundColor: '#94c8e5',
         alignItems: 'center',
 
     },
-    num : {
-        flex: 13,
-        width: 'auto',
-        height: 'auto',
-        backgroundColor: 'red'
-    },
-    items : {
-        flexDirection: 'row'
-    },
-    t:{
-        margin: 5
-    },
-    txt : {
-        height: 18,
-        width: 50,
-        textAlign: 'center'
-    },
     description: {
-        color: 'blue'
-
+        color: 'blue',
+        margin: 2
     },
     title : {
         fontSize: 15,
@@ -158,9 +105,13 @@ const styles = StyleSheet.create ({
     },
     frqTable: {
         flexDirection: 'row',
+        margin: 5,
+        
     },
     data : {
         alignItems: 'center',
+        height: 20,
+        width: 'auto'
     },
     separator : {
         width : 1,

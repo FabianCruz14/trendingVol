@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Header = () => {
     return (
-        <SafeAreaView style = {{backgroundColor: 'black'}}>
+        <SafeAreaView>
 
         <View style = {styles.header}>
                 <Text style = {styles.innerText}>
@@ -21,8 +21,9 @@ const Header = () => {
 const styles = StyleSheet.create({
     header: {
         height: 50,
-        width: '100%',
+        flex: 1,
         backgroundColor: '#3692c1',
+        marginBottom: 5
     },
     innerText: {
         fontFamily: 'Poppins',

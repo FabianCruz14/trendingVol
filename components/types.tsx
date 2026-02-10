@@ -39,7 +39,7 @@ export interface Selection{
 
 // interface to Frecuency table
 export interface FrqTableProps{
-    name : string;
+    name? : string;
     array : number[];
-    action : string;
+    action? : string;
 }
